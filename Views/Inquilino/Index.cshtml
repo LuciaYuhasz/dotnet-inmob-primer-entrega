@@ -1,0 +1,29 @@
+@model IEnumerable<dotnet_inmob_primer_entrega.Models.Inquilino>
+
+<h2>Inquilinos</h2>
+
+<a asp-action="Create" class="btn btn-success">Nuevo Inquilino</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DNI</td>
+                <td>@item.Nombre</td>
+                <td>@item.Apellido</td>
+                <td>@item.Telefono</td>
+                <td>@item.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
