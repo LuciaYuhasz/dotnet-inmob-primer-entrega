@@ -20,7 +20,7 @@ public class InquilinoController : Controller
     // GET: /Inquilino/Create
     public IActionResult Create()
     {
-        return View();
+        return View("Form", new Inquilino()); // Vista compartida
     }
 
     // POST: /Inquilino/Create
@@ -34,7 +34,56 @@ public class InquilinoController : Controller
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+        return View("Form", inquilino);
+    }
 
-        return View(inquilino);
+    // GET: /Inquilino/Edit/5
+    public IActionResult Edit(int id)
+    {
+        var inquilino = _context.Inquilinos.FirstOrDefault(i => i.Id == id);
+        if (inquilino == null)
+        {
+            return NotFound();
+        }
+        return View("Form", inquilino);
+    }
+
+    // POST: /Inquilino/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(Inquilino inquilino)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Inquilinos.Update(inquilino);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        return View("Form", inquilino);
+    }
+
+    // GET: /Inquilino/Delete/5
+    public IActionResult Delete(int id)
+    {
+        var inquilino = _context.Inquilinos.FirstOrDefault(i => i.Id == id);
+        if (inquilino == null)
+        {
+            return NotFound();
+        }
+        return View(inquilino); // Podés crear una vista Delete.cshtml para confirmar
+    }
+
+    // POST: /Inquilino/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteConfirmed(int id)
+    {
+        var inquilino = _context.Inquilinos.FirstOrDefault(i => i.Id == id);
+        if (inquilino != null)
+        {
+            _context.Inquilinos.Remove(inquilino);
+            _context.SaveChanges();
+        }
+        return RedirectToAction(nameof(Index));
     }
 }

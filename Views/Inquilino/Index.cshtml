@@ -1,8 +1,12 @@
 @model IEnumerable<dotnet_inmob_primer_entrega.Models.Inquilino>
 
-<h2>Inquilinos</h2>
+@{
+    ViewData["Title"] = "Inquilinos";
+}
 
-<a asp-action="Create" class="btn btn-success">Nuevo Inquilino</a>
+<h1>Inquilinos</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Agregar Inquilino</a>
 
 <table class="table table-striped">
     <thead>
@@ -12,6 +16,7 @@
             <th>Apellido</th>
             <th>Teléfono</th>
             <th>Email</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +28,10 @@
                 <td>@item.Apellido</td>
                 <td>@item.Telefono</td>
                 <td>@item.Email</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
             </tr>
         }
     </tbody>
